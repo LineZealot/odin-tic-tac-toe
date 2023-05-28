@@ -5,7 +5,8 @@ function playGame() {
     gameboardSquares: [],
     createGameboard: () => {
       const gameboardTable = document.createElement('table');
-      gameboardTable.className = 'game-board';
+      gameboardTable.className = 'gameboard';
+      gameboardTable.id = 'gameboard';
 
       for (let i = 0; i < 3; i += 1) {
         const gameRow = document.createElement('tr');
@@ -32,14 +33,15 @@ function playGame() {
       destroyGameboardButton.textContent = 'Reset Board';
 
       destroyGameboardButton.addEventListener('click', () => {
-        pageBody.remove(Gameboard.createGameboard);
+        document.getElementById('gameboard').remove();
+        Gameboard.createGameboard();
       });
       pageBody.appendChild(destroyGameboardButton);
     },
   };
 
-  Gameboard.createGameboard();
   Gameboard.destroyGameboard();
+  Gameboard.createGameboard();
 }
 
 playGame();
