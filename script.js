@@ -32,6 +32,7 @@ function playGame() {
           const gameSquare = document.createElement('td');
           gameSquare.className = 'game-square';
           gameSquare.id = `${rowSquareId}square-${j}`;
+          gameSquare.value = 'unclicked';
           gameRow.appendChild(gameSquare);
           Gameboard.gameboardSquares.push(gameSquare);
         }
@@ -44,16 +45,19 @@ function playGame() {
     gameSquareEvents: () => {
       Gameboard.gameboardSquares.forEach((e) => {
         e.addEventListener('click', () => {
-          let currentPlayer;
-          if (gameController.turn === 'p1') {
-            gameController.turn = 'p2';
-            currentPlayer = gameController.playerOne;
-          } else {
-            [gameController.turn] = gameController.playerIds;
-            currentPlayer = gameController.playerTwo;
+          if (e.value === 'unclicked') {
+            let currentPlayer;
+            if (gameController.turn === 'p1') {
+              gameController.turn = 'p2';
+              currentPlayer = gameController.playerOne;
+            } else {
+              [gameController.turn] = gameController.playerIds;
+              currentPlayer = gameController.playerTwo;
+            }
+            e.textContent = currentPlayer.symbol;
+            e.style.color = currentPlayer.color;
+            e.value = 'clicked';
           }
-          e.textContent = currentPlayer.symbol;
-          e.style.color = currentPlayer.color;
         });
       });
     },
