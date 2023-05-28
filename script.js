@@ -27,6 +27,13 @@ function playGame() {
       pageBody.appendChild(gameboardTable);
       return gameboardTable;
     },
+    gameSquareEvents: () => {
+      Gameboard.gameboardSquares.forEach((e) => {
+        e.addEventListener('click', () => {
+          e.textContent = 'X';
+        });
+      });
+    },
     destroyGameboard: () => {
       const destroyGameboardButton = document.createElement('button');
       destroyGameboardButton.className = 'destroy-gameboard-button';
@@ -35,13 +42,16 @@ function playGame() {
       destroyGameboardButton.addEventListener('click', () => {
         document.getElementById('gameboard').remove();
         Gameboard.createGameboard();
+        Gameboard.gameSquareEvents();
       });
       pageBody.appendChild(destroyGameboardButton);
     },
+
   };
 
   Gameboard.destroyGameboard();
   Gameboard.createGameboard();
+  Gameboard.gameSquareEvents();
 }
 
 playGame();
