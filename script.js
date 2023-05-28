@@ -18,7 +18,7 @@ function playGame() {
           gameSquare.className = 'game-square';
           gameSquare.id = `${rowSquareId}square-${j}`;
           gameRow.appendChild(gameSquare);
-          Gameboard.gameBoardSquares.push(gameSquare); // Use correct syntax to push to the array
+          Gameboard.gameBoardSquares.push(gameSquare);
         }
         gameBoardTable.appendChild(gameRow);
       }
@@ -28,7 +28,6 @@ function playGame() {
   };
 
   Gameboard.createGameBoard();
-  console.log(Gameboard.gameBoardSquares);
 }
 
 playGame();
