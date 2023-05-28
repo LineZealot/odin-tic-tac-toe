@@ -1,6 +1,10 @@
 function playGame() {
   const pageBody = document.getElementById('game-body');
 
+  function Player(playerName, color, symbol) {
+    return { playerName, color, symbol };
+  }
+
   const Gameboard = {
     gameboardSquares: [],
     createGameboard: () => {
@@ -46,7 +50,6 @@ function playGame() {
       });
       pageBody.appendChild(destroyGameboardButton);
     },
-
   };
 
   Gameboard.destroyGameboard();
