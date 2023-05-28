@@ -16,6 +16,10 @@ html {
   align-items: center;
 }
 
+.game-row {
+    display: flex;
+}
+
 .game-square {
   display: flex;
   flex-direction: row;
