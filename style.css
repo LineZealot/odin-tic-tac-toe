@@ -9,6 +9,13 @@ html {
   margin: 0%;
 }
 
+.game-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .game-square {
   height: 10vw;
   width: 10vw;
