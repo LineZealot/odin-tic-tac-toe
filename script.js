@@ -1,5 +1,5 @@
 function playGame() {
-  const pageBody = document.querySelector('body');
+  const pageBody = document.getElementById('game-body');
 
   const Gameboard = {
     gameboardSquares: [],
