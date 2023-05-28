@@ -1,14 +1,16 @@
-body, html {
-    height: 100%;
-    padding: 0%;
-    margin: 0%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body,
+html {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0%;
+  margin: 0%;
 }
 
 .game-square {
-    height: 10vw;
-    width: 10vw;
-    border: 1px solid black;
+  height: 10vw;
+  width: 10vw;
+  border: 1px solid black;
 }
