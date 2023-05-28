@@ -2,8 +2,18 @@ function playGame() {
   const pageBody = document.getElementById('game-body');
 
   function Player(playerName, color, symbol) {
-    return { playerName, color, symbol };
+    return {
+      playerName,
+      color,
+      symbol,
+    };
   }
+  const gameController = {
+    playerOne: Player('Holden', 'red', 'X', 'p1'),
+    playerTwo: Player('Alex', 'green', 'O', 'p2'),
+    playerIds: ['p1', 'p2'],
+    turn: 'p1',
+  };
 
   const Gameboard = {
     gameboardSquares: [],
@@ -34,7 +44,16 @@ function playGame() {
     gameSquareEvents: () => {
       Gameboard.gameboardSquares.forEach((e) => {
         e.addEventListener('click', () => {
-          e.textContent = 'X';
+          let currentPlayer;
+          if (gameController.turn === 'p1') {
+            gameController.turn = 'p2';
+            currentPlayer = gameController.playerOne;
+          } else {
+            [gameController.turn] = gameController.playerIds;
+            currentPlayer = gameController.playerTwo;
+          }
+          e.textContent = currentPlayer.symbol;
+          e.style.color = currentPlayer.color;
         });
       });
     },
