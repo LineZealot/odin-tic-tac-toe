@@ -2,10 +2,10 @@ function playGame() {
   const pageBody = document.querySelector('body');
 
   const Gameboard = {
-    gameBoardSquares: [],
-    createGameBoard: () => {
-      const gameBoardTable = document.createElement('table');
-      gameBoardTable.className = 'game-board';
+    gameboardSquares: [],
+    createGameboard: () => {
+      const gameboardTable = document.createElement('table');
+      gameboardTable.className = 'game-board';
 
       for (let i = 0; i < 3; i += 1) {
         const gameRow = document.createElement('tr');
@@ -18,16 +18,16 @@ function playGame() {
           gameSquare.className = 'game-square';
           gameSquare.id = `${rowSquareId}square-${j}`;
           gameRow.appendChild(gameSquare);
-          Gameboard.gameBoardSquares.push(gameSquare);
+          Gameboard.gameboardSquares.push(gameSquare);
         }
-        gameBoardTable.appendChild(gameRow);
+        gameboardTable.appendChild(gameRow);
       }
 
-      pageBody.appendChild(gameBoardTable);
+      pageBody.appendChild(gameboardTable);
     },
   };
 
-  Gameboard.createGameBoard();
+  Gameboard.createGameboard();
 }
 
 playGame();
