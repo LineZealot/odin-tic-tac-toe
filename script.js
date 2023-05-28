@@ -24,10 +24,22 @@ function playGame() {
       }
 
       pageBody.appendChild(gameboardTable);
+      return gameboardTable;
+    },
+    destroyGameboard: () => {
+      const destroyGameboardButton = document.createElement('button');
+      destroyGameboardButton.className = 'destroy-gameboard-button';
+      destroyGameboardButton.textContent = 'Reset Board';
+
+      destroyGameboardButton.addEventListener('click', () => {
+        pageBody.remove(Gameboard.createGameboard);
+      });
+      pageBody.appendChild(destroyGameboardButton);
     },
   };
 
   Gameboard.createGameboard();
+  Gameboard.destroyGameboard();
 }
 
 playGame();
