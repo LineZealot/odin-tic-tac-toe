@@ -17,8 +17,14 @@ html {
   align-items: center;
 }
 
+.gameboard {
+    padding: 0.8vw;
+  border-radius: 24px;
+  background-color: rgb(224, 230, 225);
+}
+
 .game-row {
-    display: flex;
+  display: flex;
 }
 
 .game-square {
@@ -28,7 +34,8 @@ html {
   align-items: center;
   height: 10vw;
   width: 10vw;
-  margin: 0.1vw;;
-  border: 1px solid black;
+  margin: 0.2vw;
   font-size: 8vw;
+  border-radius: 16px;
+  background-color: white;
 }
