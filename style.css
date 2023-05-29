@@ -8,6 +8,7 @@ html {
   padding: 0%;
   margin: 0%;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: var(---background-grey-green);
 }
 
 /* Global variables */
@@ -15,6 +16,16 @@ body {
   ---background-grey-green: rgb(224, 230, 225);
   ---background-hover: rgb(238, 243, 238);
   ---background-active: rgb(204, 209, 204);
+}
+
+.game-info {
+  display: flex;
+  justify-content: center;
+  width: 75vw;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+ background-color: white;
+ border-radius: 36px;
 }
 
 .game-body {
