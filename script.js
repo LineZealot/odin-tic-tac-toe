@@ -1,17 +1,18 @@
 function playGame() {
   const pageBody = document.getElementById('game-body');
 
-  function Player(playerName, color, symbol, side) {
+  function Player(playerName, color, symbol, id, slot) {
     return {
       playerName,
       color,
       symbol,
-      side,
+      id,
+      slot,
     };
   }
   const gameController = {
-    playerOne: Player('Holden', 'red', 'X', 'p1'),
-    playerTwo: Player('Alex', 'green', 'O', 'p2'),
+    playerOne: Player('Holden', 'red', 'X', 'p1', document.getElementById('player-slot-p1')),
+    playerTwo: Player('Alex', 'green', 'O', 'p2', document.getElementById('player-slot-p2')),
     playerIds: ['p1', 'p2'],
     turn: 'p1',
   };
@@ -38,7 +39,6 @@ function playGame() {
           Gameboard.gameboardSquares.push(gameSquare);
         }
         gameboardTable.appendChild(gameRow);
-        console.log(Gameboard.gameboardSquares);
       }
 
       pageBody.appendChild(gameboardTable);
@@ -52,9 +52,11 @@ function playGame() {
             if (gameController.turn === 'p1') {
               gameController.turn = 'p2';
               currentPlayer = gameController.playerOne;
+              Gameboard.changeSlotColor(gameController.playerTwo, gameController.playerOne);
             } else {
               [gameController.turn] = gameController.playerIds;
               currentPlayer = gameController.playerTwo;
+              Gameboard.changeSlotColor(gameController.playerOne, gameController.playerTwo);
             }
             e.textContent = currentPlayer.symbol;
             e.style.color = currentPlayer.color;
@@ -64,6 +66,7 @@ function playGame() {
       });
     },
     destroyGameboard: () => {
+      const gameInfo = document.getElementById('game-info-box');
       const destroyGameboardButton = document.createElement('button');
       destroyGameboardButton.className = 'destroy-gameboard-button';
       destroyGameboardButton.textContent = 'Reset Board';
@@ -73,13 +76,18 @@ function playGame() {
         Gameboard.createGameboard();
         Gameboard.gameSquareEvents();
       });
-      pageBody.appendChild(destroyGameboardButton);
+      gameInfo.appendChild(destroyGameboardButton);
+    },
+    changeSlotColor: (x, y) => {
+      x.slot.style.backgroundColor = x.color;
+      y.slot.style.backgroundColor = 'white';
     },
   };
 
   Gameboard.destroyGameboard();
   Gameboard.createGameboard();
   Gameboard.gameSquareEvents();
+  Gameboard.changeSlotColor(gameController.playerOne, gameController.playerTwo);
 }
 
 playGame();
