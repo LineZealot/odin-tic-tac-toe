@@ -1,11 +1,12 @@
 function playGame() {
   const pageBody = document.getElementById('game-body');
 
-  function Player(playerName, color, symbol) {
+  function Player(playerName, color, symbol, side) {
     return {
       playerName,
       color,
       symbol,
+      side,
     };
   }
   const gameController = {
@@ -37,6 +38,7 @@ function playGame() {
           Gameboard.gameboardSquares.push(gameSquare);
         }
         gameboardTable.appendChild(gameRow);
+        console.log(Gameboard.gameboardSquares);
       }
 
       pageBody.appendChild(gameboardTable);
