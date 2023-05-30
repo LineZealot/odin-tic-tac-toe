@@ -84,10 +84,15 @@ function playGame() {
     },
   };
 
-  Gameboard.destroyGameboard();
-  Gameboard.createGameboard();
-  Gameboard.gameSquareEvents();
-  Gameboard.changeSlotColor(gameController.playerOne, gameController.playerTwo);
+  function startGame() {
+    gameController.playerOne.slot.textContent = gameController.playerOne.playerName;
+    gameController.playerTwo.slot.textContent = gameController.playerTwo.playerName;
+    Gameboard.destroyGameboard();
+    Gameboard.createGameboard();
+    Gameboard.gameSquareEvents();
+    Gameboard.changeSlotColor(gameController.playerOne, gameController.playerTwo);
+  }
+  startGame();
 }
 
 playGame();
