@@ -113,7 +113,9 @@ function playGame() {
             e.body.style.color = currentPlayer.color;
             e.body.value = 'clicked';
             e.value = currentPlayer.symbol;
-            Gameboard.checkThreeRow(Gameboard.gameboardSquares, currentPlayer);
+            gameController.checkThreeRow(
+              gameboard.gameboardSquares,
+              currentPlayer,
             );
           }
         });
