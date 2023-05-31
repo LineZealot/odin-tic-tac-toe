@@ -30,6 +30,7 @@ function playGame() {
     turn: 'p1',
   };
 
+  const gameController = {
     winner: 'none',
   };
 
@@ -84,27 +85,31 @@ function playGame() {
 
       if (isWinningRow) {
         player.slot.textContent = `${player.playerName} wins!`;
+        gameController.winner = player.playerName;
       }
     },
 
     gameSquareEvents: () => {
       Gameboard.gameboardSquares.forEach((e) => {
         e.body.addEventListener('click', () => {
-          if (e.body.value === 'unclicked') {
+          if (
+            e.body.value === 'unclicked'
+            && gameController.winner === 'none'
+          ) {
             let currentPlayer;
-            if (gameController.turn === 'p1') {
-              gameController.turn = 'p2';
-              currentPlayer = gameController.playerOne;
+            if (playerController.turn === 'p1') {
+              playerController.turn = 'p2';
+              currentPlayer = playerController.playerOne;
               Gameboard.changeSlotColor(
-                gameController.playerTwo,
-                gameController.playerOne,
+                playerController.playerTwo,
+                playerController.playerOne,
               );
             } else {
-              [gameController.turn] = gameController.playerIds;
-              currentPlayer = gameController.playerTwo;
+              [playerController.turn] = playerController.playerIds;
+              currentPlayer = playerController.playerTwo;
               Gameboard.changeSlotColor(
-                gameController.playerOne,
-                gameController.playerTwo,
+                playerController.playerOne,
+                playerController.playerTwo,
               );
             }
             e.body.textContent = currentPlayer.symbol;
@@ -140,14 +145,14 @@ function playGame() {
   };
 
   function startGame() {
-    gameController.playerOne.slot.textContent = gameController.playerOne.playerName;
-    gameController.playerTwo.slot.textContent = gameController.playerTwo.playerName;
+    playerController.playerOne.slot.textContent = playerController.playerOne.playerName;
+    playerController.playerTwo.slot.textContent = playerController.playerTwo.playerName;
     Gameboard.destroyGameboard();
     Gameboard.createGameboard();
     Gameboard.gameSquareEvents();
     Gameboard.changeSlotColor(
-      gameController.playerOne,
-      gameController.playerTwo,
+      playerController.playerOne,
+      playerController.playerTwo,
     );
   }
   startGame();
