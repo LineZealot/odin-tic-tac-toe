@@ -31,7 +31,7 @@ function playGame() {
 
   const gameboard = {
     gameboardSquares: [],
-    createGameboard: () => {
+    creategameboard: () => {
       const gameboardTable = document.createElement('table');
       gameboardTable.className = 'gameboard';
       gameboardTable.id = 'gameboard';
@@ -48,7 +48,7 @@ function playGame() {
           gameSquare.id = `${rowSquareId}square-${j}`;
           gameSquare.value = 'unclicked';
           gameRow.appendChild(gameSquare);
-          Gameboard.gameboardSquares.push({
+          gameboard.gameboardSquares.push({
             body: gameSquare,
             value: 'empty',
           });
@@ -87,7 +87,7 @@ function playGame() {
     },
 
     gameSquareEvents: () => {
-      Gameboard.gameboardSquares.forEach((e) => {
+      gameboard.gameboardSquares.forEach((e) => {
         e.body.addEventListener('click', () => {
           if (
             e.body.value === 'unclicked'
@@ -97,14 +97,14 @@ function playGame() {
             if (playerController.turn === 'p1') {
               playerController.turn = 'p2';
               currentPlayer = playerController.playerOne;
-              Gameboard.changeSlotColor(
+              gameboard.changeSlotColor(
                 playerController.playerTwo,
                 playerController.playerOne,
               );
             } else {
               [playerController.turn] = playerController.playerIds;
               currentPlayer = playerController.playerTwo;
-              Gameboard.changeSlotColor(
+              gameboard.changeSlotColor(
                 playerController.playerOne,
                 playerController.playerTwo,
               );
