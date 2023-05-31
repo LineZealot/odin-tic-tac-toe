@@ -10,7 +10,8 @@ function playGame() {
       slot,
     };
   }
-  const gameController = {
+
+  const playerController = {
     playerOne: Player(
       'Holden',
       'red',
@@ -27,6 +28,9 @@ function playGame() {
     ),
     playerIds: ['p1', 'p2'],
     turn: 'p1',
+  };
+
+    winner: 'none',
   };
 
   const Gameboard = {
