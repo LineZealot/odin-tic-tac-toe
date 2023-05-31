@@ -65,6 +65,8 @@ function playGame() {
       return gameboardTable;
     },
 
+      currentPlayer.slot.style.backgroundColor = x.color;
+      priorPlayer.slot.style.backgroundColor = 'white';
     checkThreeRow: (square, p) => {
       const player = p;
 
@@ -117,30 +119,31 @@ function playGame() {
             e.body.value = 'clicked';
             e.value = currentPlayer.symbol;
             Gameboard.checkThreeRow(Gameboard.gameboardSquares, currentPlayer);
+            );
           }
         });
       });
     },
 
-    destroyGameboard: () => {
-      const gameInfo = document.getElementById('game-info-box');
-      const destroyGameboardButton = document.createElement('button');
-      destroyGameboardButton.className = 'destroy-gameboard-button';
       destroyGameboardButton.textContent = 'Reset Board';
-
-      destroyGameboardButton.addEventListener('click', () => {
+    resetGame: () => {
+      gameboard.resetGameButton().addEventListener('click', () => {
+        gameController.winner = 'none';
         document.getElementById('gameboard').remove();
         Gameboard.createGameboard();
-        Gameboard.gameSquareEvents();
+        gameboard.gameboardSquares.splice(0, gameboard.gameboardSquares.length);
+        gameboard.creategameboard();
+        gameController.gameSquareEvents();
+        console.log(gameboard.gameboardSquares);
+        function resetPlayerText () {
+          playerController.playerOne.slot.textContent = playerController.
+        } ();
       });
       gameInfo.appendChild(destroyGameboardButton);
     },
 
     changeSlotColor: (x, y) => {
       const currentPlayer = x;
-      const priorPlayer = y;
-      currentPlayer.slot.style.backgroundColor = x.color;
-      priorPlayer.slot.style.backgroundColor = 'white';
     },
   };
 
