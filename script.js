@@ -29,11 +29,7 @@ function playGame() {
     turn: 'p1',
   };
 
-  const gameController = {
-    winner: 'none',
-  };
-
-  const Gameboard = {
+  const gameboard = {
     gameboardSquares: [],
     createGameboard: () => {
       const gameboardTable = document.createElement('table');
