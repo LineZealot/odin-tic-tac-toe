@@ -26,7 +26,6 @@ function playGame() {
       'p2',
       document.getElementById('player-slot-p2'),
     ),
-    playerIds: ['p1', 'p2'],
     turn: 'p1',
   };
 
