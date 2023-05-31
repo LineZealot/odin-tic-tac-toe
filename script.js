@@ -60,7 +60,9 @@ function playGame() {
       return gameboardTable;
     },
 
-    checkThreeRow: (square, player) => {
+    checkThreeRow: (square, p) => {
+      const player = p;
+
       const winningRows = [
         [0, 1, 2],
         [3, 4, 5],
@@ -126,8 +128,10 @@ function playGame() {
     },
 
     changeSlotColor: (x, y) => {
-      x.slot.style.backgroundColor = x.color;
-      y.slot.style.backgroundColor = 'white';
+      const currentPlayer = x;
+      const priorPlayer = y;
+      currentPlayer.slot.style.backgroundColor = x.color;
+      priorPlayer.slot.style.backgroundColor = 'white';
     },
   };
 
