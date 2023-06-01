@@ -77,6 +77,13 @@ function playGame() {
       currentPlayer.slot.style.backgroundColor = x.color;
       priorPlayer.slot.style.backgroundColor = 'white';
     },
+
+    winningOverlay: () => {
+      const overlay = document.createElement('div');
+      overlay.id = 'overlay';
+      pageBody.appendChild(overlay);
+      return overlay;
+    },
   };
 
   const gameController = {
@@ -100,8 +107,14 @@ function playGame() {
       );
 
       if (isWinningRow) {
-        player.slot.textContent = `${player.playerName} wins!`;
-        gameController.winner = player.playerName;
+        gameboard.winningOverlay();
+        const overlay = document.getElementById('overlay');
+        overlay.textContent = `${player.playerName} wins!`;
+        overlay.style.display = 'flex';
+        overlay.addEventListener('click', () => {
+          overlay.style.display = 'none';
+          gameController.resetGame();
+        });
       }
     },
 
