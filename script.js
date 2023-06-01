@@ -12,20 +12,22 @@ function playGame() {
   }
 
   const playerController = {
-    playerOne: Player(
-      'Holden',
-      'red',
-      'X',
-      'p1',
-      document.getElementById('player-slot-p1'),
-    ),
-    playerTwo: Player(
-      'Alex',
-      'green',
-      'O',
-      'p2',
-      document.getElementById('player-slot-p2'),
-    ),
+    players: {
+      playerOne: Player(
+        'Holden',
+        'red',
+        'X',
+        'p1',
+        document.getElementById('player-slot-p1'),
+      ),
+      playerTwo: Player(
+        'Alex',
+        'green',
+        'O',
+        'p2',
+        document.getElementById('player-slot-p2'),
+      ),
+    },
     turn: 'p1',
   };
 
@@ -60,8 +62,25 @@ function playGame() {
       return gameboardTable;
     },
 
+    resetGameButton: () => {
+      const gameInfo = document.getElementById('game-info-box');
+      const resetButton = document.createElement('button');
+      resetButton.className = 'destroy-gameboard-button';
+      resetButton.textContent = 'Reset Board';
+      gameInfo.appendChild(resetButton);
+      return resetButton;
+    },
+
+    changeSlotColor: (x, y) => {
+      const currentPlayer = x;
+      const priorPlayer = y;
       currentPlayer.slot.style.backgroundColor = x.color;
       priorPlayer.slot.style.backgroundColor = 'white';
+    },
+  };
+
+  const gameController = {
+    winner: 'none',
     checkThreeRow: (square, p) => {
       const player = p;
 
@@ -96,17 +115,17 @@ function playGame() {
             let currentPlayer;
             if (playerController.turn === 'p1') {
               playerController.turn = 'p2';
-              currentPlayer = playerController.playerOne;
+              currentPlayer = playerController.players.playerOne;
               gameboard.changeSlotColor(
-                playerController.playerTwo,
-                playerController.playerOne,
+                playerController.players.playerTwo,
+                playerController.players.playerOne,
               );
             } else {
-              [playerController.turn] = playerController.playerIds;
-              currentPlayer = playerController.playerTwo;
+              playerController.turn = 'p1';
+              currentPlayer = playerController.players.playerTwo;
               gameboard.changeSlotColor(
-                playerController.playerOne,
-                playerController.playerTwo,
+                playerController.players.playerOne,
+                playerController.players.playerTwo,
               );
             }
             e.body.textContent = currentPlayer.symbol;
@@ -122,37 +141,33 @@ function playGame() {
       });
     },
 
-      destroyGameboardButton.textContent = 'Reset Board';
     resetGame: () => {
       gameboard.resetGameButton().addEventListener('click', () => {
         gameController.winner = 'none';
         document.getElementById('gameboard').remove();
-        Gameboard.createGameboard();
         gameboard.gameboardSquares.splice(0, gameboard.gameboardSquares.length);
         gameboard.creategameboard();
         gameController.gameSquareEvents();
-        console.log(gameboard.gameboardSquares);
-        function resetPlayerText () {
-          playerController.playerOne.slot.textContent = playerController.
-        } ();
+        function resetPlayerText() {
+          Object.values(playerController.players).forEach((p) => {
+            const player = p;
+            player.slot.textContent = player.playerName;
+          });
+        }
+        resetPlayerText();
       });
-      gameInfo.appendChild(destroyGameboardButton);
-    },
-
-    changeSlotColor: (x, y) => {
-      const currentPlayer = x;
     },
   };
 
   function startGame() {
-    playerController.playerOne.slot.textContent = playerController.playerOne.playerName;
-    playerController.playerTwo.slot.textContent = playerController.playerTwo.playerName;
-    Gameboard.destroyGameboard();
-    Gameboard.createGameboard();
-    Gameboard.gameSquareEvents();
-    Gameboard.changeSlotColor(
-      playerController.playerOne,
-      playerController.playerTwo,
+    playerController.players.playerOne.slot.textContent = playerController.players.playerOne.playerName;
+    playerController.players.playerTwo.slot.textContent = playerController.players.playerTwo.playerName;
+    gameController.resetGame();
+    gameboard.creategameboard();
+    gameController.gameSquareEvents();
+    gameboard.changeSlotColor(
+      playerController.players.playerOne,
+      playerController.players.playerTwo,
     );
   }
   startGame();
