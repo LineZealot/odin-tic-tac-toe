@@ -29,6 +29,43 @@ body {
  background-color: white;
  border-radius: 36px;
 }
+
+.form-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: max(1vw, 8px);
+  align-items: center;
+  width: max(25vw, 200px);
+  height: max(20vw, 200px);
+  font-size: 18px;
+  background-color: white;
+  border-radius: 24px;
+}
+
+fieldset {
+  align-content: center;
+  border: none;
+  width: max(20vw, 180px);
+  height: fit-content;
+}
+
+.player-form {
+  align-self: flex-end;
+  height: 20px;
+  width: max(13.5vw, 180px);
+  padding-left: 0.5vw;
+  font-size: 18px;
+  border: none;
+  border-radius: 16px;
+  background-color: var(---background-grey-green);
+}
+
+.player-label {
+  align-self: flex-start;
+  margin-right: max(1vw, 8px);
+}
+
 .pretty-row {
   display: flex;
   justify-content: center;
