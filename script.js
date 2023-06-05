@@ -62,6 +62,15 @@ function playGame() {
       return gameboardTable;
     },
 
+    resetGameButton: () => {
+      const gameInfo = document.getElementById('game-info-box');
+      const resetButton = document.createElement('button');
+      resetButton.className = 'destroy-gameboard-button';
+      resetButton.textContent = 'Reset Board';
+      gameInfo.appendChild(resetButton);
+      return resetButton;
+    },
+
     changeSlotColor: (x, y) => {
       const currentPlayer = x;
       const priorPlayer = y;
@@ -74,34 +83,6 @@ function playGame() {
       overlay.id = 'overlay';
       pageBody.appendChild(overlay);
       return overlay;
-    },
-  };
-
-  const rematch = {
-    resetGameButton: () => {
-      const gameInfo = document.getElementById('game-info-box');
-      const resetButton = document.createElement('button');
-      resetButton.className = 'destroy-gameboard-button';
-      resetButton.textContent = 'Reset Board';
-      gameInfo.appendChild(resetButton);
-      resetButton.addEventListener('click', () => {
-        rematch.resetGame();
-      });
-    },
-
-    resetGame: () => {
-      gameController.winner = 'none';
-      document.getElementById('gameboard').remove();
-      gameboard.gameboardSquares.splice(0, gameboard.gameboardSquares.length);
-      gameboard.creategameboard();
-      gameController.gameSquareEvents();
-      function resetPlayerText() {
-        Object.values(playerController.players).forEach((p) => {
-          const player = p;
-          player.slot.textContent = player.playerName;
-        });
-      }
-      resetPlayerText();
     },
   };
 
@@ -132,7 +113,7 @@ function playGame() {
         overlay.style.display = 'flex';
         overlay.addEventListener('click', () => {
           overlay.style.display = 'none';
-          rematch.resetGame();
+          gameController.resetGame();
         });
       }
     },
@@ -172,12 +153,29 @@ function playGame() {
         });
       });
     },
+
+    resetGame: () => {
+      gameboard.resetGameButton().addEventListener('click', () => {
+        gameController.winner = 'none';
+        document.getElementById('gameboard').remove();
+        gameboard.gameboardSquares.splice(0, gameboard.gameboardSquares.length);
+        gameboard.creategameboard();
+        gameController.gameSquareEvents();
+        function resetPlayerText() {
+          Object.values(playerController.players).forEach((p) => {
+            const player = p;
+            player.slot.textContent = player.playerName;
+          });
+        }
+        resetPlayerText();
+      });
+    },
   };
 
   function startGame() {
     playerController.players.playerOne.slot.textContent = playerController.players.playerOne.playerName;
     playerController.players.playerTwo.slot.textContent = playerController.players.playerTwo.playerName;
-    rematch.resetGameButton();
+    gameController.resetGame();
     gameboard.creategameboard();
     gameController.gameSquareEvents();
     gameboard.changeSlotColor(
