@@ -9,14 +9,37 @@ function playGame() {
 
       function inputElements() {
         const playerData = [];
-        const formP1 = document.createElement('input');
-        const formP2 = document.createElement('input');
-        playerData.push(formP1, formP2);
-        playerData.forEach((e) => {
-          e.type = 'text';
-          e.className = 'player-form';
-          formBody.appendChild(e);
-        });
+        (function createInputs() {
+          for (let x = 0; x < 2; x += 1) {
+            const player = document.createElement('input');
+            player.type = 'text';
+            player.className = 'player-form';
+            player.id = `player-input-${x}`;
+            playerData.push(player);
+          }
+        }());
+        const labels = [];
+        (function createLabels() {
+          for (let x = 0; x < 2; x += 1) {
+            const label = document.createElement('label');
+            label.setAttribute('for', `player-input-${x}`);
+            label.className = 'player-label';
+            label.textContent = `Player ${x + 1}`;
+            labels.push(label);
+          }
+        }());
+        (function createFieldsets() {
+          const fieldsets = [];
+          for (let x = 0; x < 2; x += 1) {
+            const inputArea = document.createElement('fieldset');
+            inputArea.className = 'input-area';
+            inputArea.id = `input-area-${x + 1}`;
+            fieldsets.push(inputArea);
+            inputArea.appendChild(labels[x]);
+            inputArea.appendChild(playerData[x]);
+            formBody.appendChild(inputArea);
+          }
+        }());
         elements.playerData = playerData;
       }
 
