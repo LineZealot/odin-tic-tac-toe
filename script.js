@@ -155,19 +155,23 @@ function playGame() {
     },
 
     resetGame: () => {
+      gameController.winner = 'none';
+      document.getElementById('gameboard').remove();
+      gameboard.gameboardSquares.splice(0, gameboard.gameboardSquares.length);
+      gameboard.creategameboard();
+      gameController.gameSquareEvents();
+      function resetPlayerText() {
+        Object.values(playerController.players).forEach((p) => {
+          const player = p;
+          player.slot.textContent = player.playerName;
+        });
+      }
+      resetPlayerText();
+    },
+
+    resetButtonEvents: () => {
       gameboard.resetGameButton().addEventListener('click', () => {
-        gameController.winner = 'none';
-        document.getElementById('gameboard').remove();
-        gameboard.gameboardSquares.splice(0, gameboard.gameboardSquares.length);
-        gameboard.creategameboard();
-        gameController.gameSquareEvents();
-        function resetPlayerText() {
-          Object.values(playerController.players).forEach((p) => {
-            const player = p;
-            player.slot.textContent = player.playerName;
-          });
-        }
-        resetPlayerText();
+        gameController.resetGame();
       });
     },
   };
@@ -179,8 +183,8 @@ function playGame() {
     playerController.players.playerTwo.slot.textContent = (
       playerController.players.playerTwo.playerName
     );
-    gameController.resetGame();
     gameboard.creategameboard();
+    gameController.resetGame();
     gameController.gameSquareEvents();
     gameboard.changeSlotColor(
       playerController.players.playerOne,
