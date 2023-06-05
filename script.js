@@ -185,6 +185,7 @@ function playGame() {
     );
     gameboard.creategameboard();
     gameController.resetGame();
+    gameController.resetButtonEvents();
     gameController.gameSquareEvents();
     gameboard.changeSlotColor(
       playerController.players.playerOne,
