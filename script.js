@@ -53,14 +53,14 @@ function playGame() {
   const playerController = {
     players: {
       playerOne: Player(
-        'Holden',
+        '',
         'red',
         'X',
         'p1',
         document.getElementById('player-slot-p1'),
       ),
       playerTwo: Player(
-        'Alex',
+        '',
         'green',
         'O',
         'p2',
@@ -218,23 +218,32 @@ function playGame() {
     },
   };
 
-  function startGame() {
-    playerController.players.playerOne.slot.textContent = (
-      playerController.players.playerOne.playerName
-    );
-    playerController.players.playerTwo.slot.textContent = (
-      playerController.players.playerTwo.playerName
-    );
-    gameboard.creategameboard();
-    gameController.resetGame();
-    gameController.resetButtonEvents();
-    gameController.gameSquareEvents();
-    gameboard.changeSlotColor(
-      playerController.players.playerOne,
-      playerController.players.playerTwo,
-    );
-  }
-  startGame();
+  (function startGame() {
+    const gameDisplay = document.getElementById('game-info-box');
+    playerForm.elements.buttonElement.addEventListener('click', () => {
+      (function setNames() {
+        playerController.players.playerOne.playerName = playerForm.elements.playerData[0].value;
+        playerController.players.playerTwo.playerName = playerForm.elements.playerData[1].value;
+
+        playerController.players.playerOne.slot.textContent = (
+          playerController.players.playerOne.playerName
+        );
+        playerController.players.playerTwo.slot.textContent = (
+          playerController.players.playerTwo.playerName
+        );
+        playerForm.elements.formBody.style.display = 'none';
+        gameDisplay.style.display = 'flex';
+      }());
+      gameboard.creategameboard();
+      gameController.resetGame();
+      gameController.resetButtonEvents();
+      gameController.gameSquareEvents();
+      gameboard.changeSlotColor(
+        playerController.players.playerOne,
+        playerController.players.playerTwo,
+      );
+    });
+  }());
 }
 
 playGame();
