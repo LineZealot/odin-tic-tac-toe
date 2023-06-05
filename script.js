@@ -1,5 +1,44 @@
 function playGame() {
-  const pageBody = document.getElementById('game-body');
+  const playerForm = (function getPlayerNames() {
+    const htmlBody = document.querySelector('body');
+    const elements = {};
+
+    function createForm() {
+      const formBody = document.createElement('form');
+      formBody.className = 'form-body';
+
+      function inputElements() {
+        const playerData = [];
+        const formP1 = document.createElement('input');
+        const formP2 = document.createElement('input');
+        playerData.push(formP1, formP2);
+        playerData.forEach((e) => {
+          e.type = 'text';
+          e.className = 'player-form';
+          formBody.appendChild(e);
+        });
+        elements.playerData = playerData;
+      }
+
+      inputElements();
+
+      function submitButton() {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'form-button';
+        button.textContent = 'Play Game!';
+        formBody.appendChild(button);
+        elements.buttonElement = button;
+      }
+
+      submitButton();
+      htmlBody.appendChild(formBody);
+      elements.formBody = formBody;
+    }
+
+    createForm();
+    return { elements };
+  }());
 
   function Player(playerName, color, symbol, id, slot) {
     return {
@@ -32,7 +71,10 @@ function playGame() {
   };
 
   const gameboard = {
+    pageBody: document.getElementById('game-body'),
+
     gameboardSquares: [],
+
     creategameboard: () => {
       const gameboardTable = document.createElement('table');
       gameboardTable.className = 'gameboard';
@@ -58,7 +100,7 @@ function playGame() {
         gameboardTable.appendChild(gameRow);
       }
 
-      pageBody.appendChild(gameboardTable);
+      gameboard.pageBody.appendChild(gameboardTable);
       return gameboardTable;
     },
 
@@ -81,7 +123,7 @@ function playGame() {
     winningOverlay: () => {
       const overlay = document.createElement('div');
       overlay.id = 'overlay';
-      pageBody.appendChild(overlay);
+      gameboard.pageBody.appendChild(overlay);
       return overlay;
     },
   };
