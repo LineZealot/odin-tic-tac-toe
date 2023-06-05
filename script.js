@@ -173,8 +173,12 @@ function playGame() {
   };
 
   function startGame() {
-    playerController.players.playerOne.slot.textContent = playerController.players.playerOne.playerName;
-    playerController.players.playerTwo.slot.textContent = playerController.players.playerTwo.playerName;
+    playerController.players.playerOne.slot.textContent = (
+      playerController.players.playerOne.playerName
+    );
+    playerController.players.playerTwo.slot.textContent = (
+      playerController.players.playerTwo.playerName
+    );
     gameController.resetGame();
     gameboard.creategameboard();
     gameController.gameSquareEvents();
