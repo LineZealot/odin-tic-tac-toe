@@ -142,19 +142,20 @@ function playGame() {
       currentPlayer.slot.style.backgroundColor = x.color;
       priorPlayer.slot.style.backgroundColor = 'white';
     },
-
-    winningOverlay: () => {
-      const overlay = document.createElement('div');
-      overlay.id = 'overlay';
-      gameboard.pageBody.appendChild(overlay);
-      return overlay;
-    },
   };
+
+  const createOverlay = (function winningOverlay() {
+    const overlay = document.createElement('div');
+    overlay.id = 'overlay';
+    gameboard.pageBody.appendChild(overlay);
+    return { overlay };
+  }());
 
   const gameController = {
     winner: 'none',
     checkThreeRow: (square, p) => {
       const player = p;
+      const { overlay } = createOverlay;
 
       const winningRows = [
         [0, 1, 2],
@@ -171,10 +172,21 @@ function playGame() {
         (row) => row.every((index) => square[index].value === player.symbol),
       );
 
+      function checkForChecked(x) {
+        return x.body.value === 'clicked';
+      }
+      const isTie = gameboard.gameboardSquares.every(checkForChecked);
+      console.log(isTie);
+
       if (isWinningRow) {
-        gameboard.winningOverlay();
-        const overlay = document.getElementById('overlay');
         overlay.textContent = `${player.playerName} wins!`;
+        overlay.style.display = 'flex';
+        overlay.addEventListener('click', () => {
+          overlay.style.display = 'none';
+          gameController.resetGame();
+        });
+      } else if (isTie === true) {
+        overlay.textContent = 'Tie!';
         overlay.style.display = 'flex';
         overlay.addEventListener('click', () => {
           overlay.style.display = 'none';
