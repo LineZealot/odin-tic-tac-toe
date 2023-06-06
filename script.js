@@ -176,7 +176,6 @@ function playGame() {
         return x.body.value === 'clicked';
       }
       const isTie = gameboard.gameboardSquares.every(checkForChecked);
-      console.log(isTie);
 
       if (isWinningRow) {
         overlay.textContent = `${player.playerName} wins!`;
