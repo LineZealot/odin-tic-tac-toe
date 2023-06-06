@@ -38,7 +38,7 @@ body {
   align-items: center;
   width: max(25vw, 200px);
   height: max(20vw, 200px);
-  font-size: 18px;
+  font-size: max(1.2vw, 18px);
   background-color: white;
   border-radius: 24px;
 }
@@ -52,10 +52,10 @@ fieldset {
 
 .player-form {
   align-self: flex-end;
-  height: 20px;
-  width: max(13.5vw, 180px);
+  height: max(1.4vw, 20px);
+  width: 100%;
   padding-left: 0.5vw;
-  font-size: 18px;
+  font-size: max(1.2vw, 18px);
   border: none;
   border-radius: 16px;
   background-color: var(---background-grey-green);
@@ -70,6 +70,28 @@ fieldset {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.form-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max(12vw, 150px);
+  height: max(2.2vw, 48px);
+  font-size: max(1.2vw, 18px);
+  color: white;
+  background-color: rgb(65, 212, 89);
+  border-radius: 16px;
+  border: 0.2vw solid var(---background-grey-green);
+}
+
+.form-button:hover {
+  background-color: rgb(69, 167, 86);
+}
+
+.form-button:active {
+  background-color: rgb(54, 117, 64);
+  color: var(---background-grey-green);
 }
 
 .player-slot {
